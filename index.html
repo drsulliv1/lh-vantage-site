@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LH Vantage® — Hobby Coding & App Creation</title>
+    <meta name="description" content="LH Vantage® builds thoughtful mobile apps for music lovers and beyond. Home of Setlist Builder for iOS.">
+    <link rel="icon" href="images/app-icon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0c0c14;
+            --bg-surface: #14141f;
+            --bg-card: #1a1a28;
+            --text: #f0f0f5;
+            --text-secondary: #9a9ab0;
+            --accent: #e63946;
+            --accent-glow: rgba(230, 57, 70, 0.3);
+            --blue: #457b9d;
+            --purple: #7c3aed;
+            --cyan: #06b6d4;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-light: rgba(255, 255, 255, 0.12);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(12, 12, 20, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 0 2rem;
+        }
+
+        nav .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        nav .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        nav .logo svg { width: 32px; height: 32px; }
+
+        nav .logo span {
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav .nav-links a:hover { color: var(--text); }
+
+        /* Hero */
+        .hero {
+            padding: 10rem 2rem 4rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Ambient glow behind hero */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 400px;
+            background: radial-gradient(ellipse, rgba(230,57,70,0.08) 0%, rgba(124,58,237,0.05) 40%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero > * { position: relative; z-index: 1; }
+
+        .hero svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero h1 sup {
+            font-size: 0.4em;
+            vertical-align: super;
+        }
+
+        .hero .tagline {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .hero .description {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        /* Divider */
+        .section-divider {
+            max-width: 1100px;
+            margin: 0 auto;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-light), transparent);
+        }
+
+        /* Section */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 3rem;
+        }
+
+        /* App Showcase */
+        .app-showcase-header {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .app-showcase-header img {
+            width: 64px;
+            height: 64px;
+            border-radius: 14px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        .app-showcase-header h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+
+        .app-showcase-header .app-subtitle {
+            color: var(--accent);
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+
+        .app-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            max-width: 580px;
+            margin: 1.5rem 0;
+        }
+
+        .app-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.4rem 2rem;
+        }
+
+        .app-features li {
+            padding: 0.4rem 0;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .app-features li::before {
+            content: "";
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .platform-badges {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        /* Screenshot carousel */
+        .screenshots {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            align-items: center;
+            margin: 4rem 0 2rem;
+            padding: 0 1rem;
+        }
+
+        .screenshot-wrapper {
+            position: relative;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .screenshot-wrapper:hover {
+            transform: translateY(-8px);
+        }
+
+        .screenshot-wrapper img {
+            width: 200px;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(230,57,70,0.08);
+        }
+
+        .screenshot-label {
+            text-align: center;
+            margin-top: 0.75rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .stat:hover {
+            border-color: var(--border-light);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), #ff6b9d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.4rem;
+        }
+
+        /* Privacy */
+        .privacy-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 3rem;
+        }
+
+        .privacy-section h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .privacy-section h3:first-of-type { margin-top: 0; }
+
+        .privacy-section p, .privacy-section ul {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .privacy-section ul { padding-left: 1.5rem; }
+        .privacy-section li { margin-bottom: 0.5rem; }
+
+        .privacy-updated {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-bottom: 2rem;
+            opacity: 0.7;
+        }
+
+        .privacy-section a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .privacy-section a:hover { text-decoration: underline; }
+
+        /* Footer */
+        footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+
+        footer p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer a:hover { color: var(--text); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero { padding: 8rem 1.5rem 3rem; }
+            .hero h1 { font-size: 2rem; letter-spacing: 2px; }
+            .app-features { grid-template-columns: 1fr; }
+            .screenshots {
+                gap: 0.75rem;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding: 0 1.5rem;
+                -webkit-overflow-scrolling: touch;
+            }
+            .screenshot-wrapper img { width: 160px; }
+            .stats { grid-template-columns: 1fr; }
+            nav .nav-links { gap: 1rem; }
+            nav .nav-links a { font-size: 0.8rem; }
+            section { padding: 3rem 1.5rem; }
+            .privacy-section { padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-inner">
+            <a href="#" class="logo">
+                <svg viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="25" r="18" fill="#FFD700" opacity="0.3"/>
+                    <circle cx="50" cy="25" r="12" fill="#FFD700" opacity="0.2"/>
+                    <polygon points="50,15 30,42 70,42" fill="currentColor"/>
+                    <rect x="33" y="42" width="34" height="18" fill="currentColor"/>
+                    <rect x="42" y="47" width="16" height="9" fill="#0c0c14"/>
+                    <polygon points="25,110 35,60 65,60 75,110" fill="currentColor"/>
+                </svg>
+                <span>LH VANTAGE®</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#apps">Apps</a></li>
+                <li><a href="#privacy">Privacy</a></li>
+                <li><a href="mailto:drsulliv@gmail.com">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <div class="hero">
+        <svg viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="25" r="24" fill="#FFD700" opacity="0.2"/>
+            <circle cx="50" cy="25" r="16" fill="#FFD700" opacity="0.12"/>
+            <polygon points="50,15 30,42 70,42" fill="#f0f0f5"/>
+            <rect x="33" y="42" width="34" height="18" fill="#f0f0f5"/>
+            <rect x="42" y="47" width="16" height="9" fill="#0c0c14"/>
+            <polygon points="25,110 35,60 65,60 75,110" fill="#f0f0f5"/>
+        </svg>
+        <h1>LH VANTAGE<sup>®</sup></h1>
+        <p class="tagline">Hobby coding & app creation</p>
+        <p class="description">We build thoughtful mobile apps that solve real problems for music lovers and beyond.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- Apps Section -->
+    <section id="apps">
+        <p class="section-label">Our Apps</p>
+
+        <div class="app-showcase-header">
+            <img src="images/app-icon.png" alt="Setlist Builder app icon">
+            <div>
+                <h3>Setlist Builder</h3>
+                <span class="app-subtitle">iOS • Free</span>
+            </div>
+        </div>
+
+        <p class="app-description">
+            Know every song before you get to the show. Setlist Builder aggregates recent setlists from an artist's
+            current tour, analyzes song frequency across performances to predict the likely setlist, and automatically
+            creates playlists on your preferred music platform — all in under 30 seconds.
+        </p>
+
+        <ul class="app-features">
+            <li>Predicts what songs an artist will play</li>
+            <li>Auto-creates Apple Music playlists</li>
+            <li>YouTube Music playlist creation</li>
+            <li>Intelligent song matching</li>
+            <li>Streamability verification</li>
+            <li>Share playlists with friends</li>
+            <li>Customizable date ranges</li>
+            <li>Retro MTV mode</li>
+        </ul>
+
+        <div class="platform-badges">
+            <span class="badge">🍎 Apple Music</span>
+            <span class="badge">▶️ YouTube Music</span>
+            <span class="badge">📊 Setlist.fm Data</span>
+        </div>
+
+        <!-- Real Screenshots -->
+        <div class="screenshots">
+            <div class="screenshot-wrapper">
+                <img src="images/screenshot-search.jpg" alt="Search for any artist">
+                <div class="screenshot-label">Search</div>
+            </div>
+            <div class="screenshot-wrapper">
+                <img src="images/screenshot-results.jpg" alt="Review your results">
+                <div class="screenshot-label">Review Results</div>
+            </div>
+            <div class="screenshot-wrapper">
+                <img src="images/screenshot-preview.jpg" alt="Create playlists">
+                <div class="screenshot-label">Create Playlist</div>
+            </div>
+            <div class="screenshot-wrapper">
+                <img src="images/screenshot-apple-music.jpg" alt="Works with Apple Music">
+                <div class="screenshot-label">Apple Music</div>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value">&lt;30s</div>
+                <div class="stat-label">Playlist creation time</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">95%+</div>
+                <div class="stat-label">Song match accuracy</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">2-3 hrs</div>
+                <div class="stat-label">Saved vs. manual research</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Privacy Section -->
+    <section id="privacy">
+        <p class="section-label">Legal</p>
+        <h2 class="section-title">Privacy Policy</h2>
+        <p class="section-subtitle">Your privacy matters. Here's exactly how our apps handle your data.</p>
+
+        <div class="privacy-section">
+            <p class="privacy-updated">Last updated: March 19, 2026</p>
+
+            <h3>Overview</h3>
+            <p>
+                Setlist Builder is developed by drsulliv for LH Vantage®. This privacy policy describes how the
+                app handles your information.
+            </p>
+
+            <h3>Data We Collect</h3>
+            <p>
+                <strong>We do not collect, store, or share any personal data.</strong> All preferences and playlist
+                information remain locally on your device. No data is sent to remote servers operated by LH Vantage.
+            </p>
+
+            <h3>Third-Party Services</h3>
+            <p>The app interfaces with the following services, each governed by their own privacy policies:</p>
+            <ul>
+                <li><strong>Apple Music</strong> — Used to create and manage playlists in your library via the native MusicKit framework.</li>
+                <li><strong>YouTube / Google</strong> — Used for YouTube Music playlist creation via the YouTube Data API v3. Requires Google sign-in with YouTube scope.</li>
+                <li><strong>Setlist.fm</strong> — Used to retrieve concert setlist data. No user account required.</li>
+            </ul>
+
+            <h3>Permissions</h3>
+            <p>The app may request the following permissions:</p>
+            <ul>
+                <li><strong>Apple Music Library Access</strong> — To create playlists in your Apple Music library.</li>
+                <li><strong>Network Access</strong> — To fetch setlist data and communicate with music platforms.</li>
+                <li><strong>Google Sign-In (optional)</strong> — To authenticate with YouTube Music for playlist creation.</li>
+            </ul>
+            <p>You may revoke these permissions at any time through your device settings.</p>
+
+            <h3>Data Deletion</h3>
+            <p>
+                Since no personal data is collected or stored on our servers, you can delete all local app data by
+                uninstalling the app or clearing app data through your device's Settings.
+            </p>
+
+            <h3>Contact</h3>
+            <p>
+                Questions about this privacy policy? Contact us at
+                <a href="mailto:drsulliv@gmail.com">drsulliv@gmail.com</a>.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 LH Vantage®. All rights reserved.</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="#privacy">Privacy Policy</a> &nbsp;·&nbsp; <a href="mailto:drsulliv@gmail.com">drsulliv@gmail.com</a>
+        </p>
+    </footer>
+
+</body>
+</html>
