@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "lh-vantage-site",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8080", "--directory", "/Users/raysullivan/Documents/lh-vantage-site"],
+      "port": 8080
+    }
+  ]
+}
