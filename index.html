@@ -5,23 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LH Vantage® — Hobby Coding & App Creation</title>
     <meta name="description" content="LH Vantage® builds thoughtful mobile apps for music lovers and beyond. Home of Setlist Builder for iOS.">
-    <link rel="icon" href="images/app-icon.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0c0c14;
-            --bg-surface: #14141f;
-            --bg-card: #1a1a28;
-            --text: #f0f0f5;
-            --text-secondary: #9a9ab0;
+            --bg: #fafafa;
+            --text: #1a1a1a;
+            --muted: #666;
             --accent: #e63946;
-            --accent-glow: rgba(230, 57, 70, 0.3);
-            --blue: #457b9d;
-            --purple: #7c3aed;
-            --cyan: #06b6d4;
-            --border: rgba(255, 255, 255, 0.08);
-            --border-light: rgba(255, 255, 255, 0.12);
+            --accent2: #457b9d;
+            --card-bg: #ffffff;
+            --border: #e5e5e5;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -32,7 +26,6 @@
             color: var(--text);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
         }
 
         /* Navigation */
@@ -40,7 +33,7 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(12, 12, 20, 0.85);
+            background: rgba(250, 250, 250, 0.9);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
@@ -65,12 +58,15 @@
             color: var(--text);
         }
 
-        nav .logo svg { width: 32px; height: 32px; }
+        nav .logo svg {
+            width: 32px;
+            height: 32px;
+        }
 
         nav .logo span {
             font-size: 1.1rem;
             font-weight: 600;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
         }
 
         nav .nav-links {
@@ -81,7 +77,7 @@
 
         nav .nav-links a {
             text-decoration: none;
-            color: var(--text-secondary);
+            color: var(--muted);
             font-size: 0.9rem;
             font-weight: 500;
             transition: color 0.2s;
@@ -91,28 +87,11 @@
 
         /* Hero */
         .hero {
-            padding: 10rem 2rem 4rem;
+            padding: 10rem 2rem 6rem;
             text-align: center;
             max-width: 800px;
             margin: 0 auto;
-            position: relative;
         }
-
-        /* Ambient glow behind hero */
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 40%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 600px;
-            height: 400px;
-            background: radial-gradient(ellipse, rgba(230,57,70,0.08) 0%, rgba(124,58,237,0.05) 40%, transparent 70%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .hero > * { position: relative; z-index: 1; }
 
         .hero svg {
             width: 80px;
@@ -121,37 +100,29 @@
         }
 
         .hero h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            letter-spacing: 3px;
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
             margin-bottom: 0.5rem;
         }
 
         .hero h1 sup {
-            font-size: 0.4em;
+            font-size: 0.5em;
             vertical-align: super;
         }
 
         .hero .tagline {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
+            font-size: 1.2rem;
+            color: var(--muted);
             font-weight: 300;
             margin-bottom: 1rem;
         }
 
         .hero .description {
             font-size: 1rem;
-            color: var(--text-secondary);
-            max-width: 480px;
+            color: var(--muted);
+            max-width: 500px;
             margin: 0 auto;
-        }
-
-        /* Divider */
-        .section-divider {
-            max-width: 1100px;
-            margin: 0 auto;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--border-light), transparent);
         }
 
         /* Section */
@@ -171,253 +142,243 @@
         }
 
         .section-title {
-            font-size: 2.2rem;
-            font-weight: 800;
-            margin-bottom: 0.75rem;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
         }
 
         .section-subtitle {
             font-size: 1.05rem;
-            color: var(--text-secondary);
+            color: var(--muted);
             max-width: 600px;
             margin-bottom: 3rem;
         }
 
-        /* App Showcase */
-        .app-showcase-header {
-            display: flex;
+        /* App Card */
+        .app-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
             align-items: center;
-            gap: 1.25rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .app-info h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
             margin-bottom: 0.5rem;
         }
 
-        .app-showcase-header img {
-            width: 64px;
-            height: 64px;
-            border-radius: 14px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-        }
-
-        .app-showcase-header h3 {
-            font-size: 1.6rem;
-            font-weight: 700;
-        }
-
-        .app-showcase-header .app-subtitle {
+        .app-info .app-subtitle {
             color: var(--accent);
             font-weight: 500;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
         }
 
-        .app-description {
-            color: var(--text-secondary);
+        .app-info p {
+            color: var(--muted);
+            margin-bottom: 1.5rem;
             font-size: 0.95rem;
-            max-width: 580px;
-            margin: 1.5rem 0;
         }
 
         .app-features {
             list-style: none;
             margin-bottom: 2rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.4rem 2rem;
         }
 
         .app-features li {
             padding: 0.4rem 0;
             font-size: 0.9rem;
-            color: var(--text-secondary);
+            color: var(--muted);
             display: flex;
             align-items: center;
-            gap: 0.6rem;
+            gap: 0.5rem;
         }
 
         .app-features li::before {
-            content: "";
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--accent);
-            flex-shrink: 0;
+            content: "✓";
+            color: var(--accent);
+            font-weight: 700;
         }
 
         .platform-badges {
             display: flex;
-            gap: 0.6rem;
+            gap: 0.75rem;
             flex-wrap: wrap;
-            margin-top: 1.5rem;
         }
 
         .badge {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 0.4rem 0.9rem;
+            padding: 0.4rem 0.8rem;
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 500;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid var(--border);
-            color: var(--text-secondary);
+            background: #f0f0f0;
+            color: var(--text);
         }
 
-        /* Screenshot carousel */
-        .screenshots {
+        .app-visual {
             display: flex;
-            gap: 1.5rem;
             justify-content: center;
             align-items: center;
-            margin: 4rem 0 2rem;
-            padding: 0 1rem;
         }
 
-        .screenshot-wrapper {
-            position: relative;
-            flex-shrink: 0;
-            transition: transform 0.3s ease;
+        .app-mockup {
+            width: 240px;
+            height: 480px;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border-radius: 36px;
+            padding: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
         }
 
-        .screenshot-wrapper:hover {
-            transform: translateY(-8px);
+        .app-mockup-inner {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #0f0f23 0%, #1a0a2e 50%, #0f0f23 100%);
+            border-radius: 26px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 2rem;
         }
 
-        .screenshot-wrapper img {
-            width: 200px;
-            height: auto;
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(230,57,70,0.08);
-        }
-
-        .screenshot-label {
+        .mockup-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ff6b9d, #c44dff, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             text-align: center;
-            margin-top: 0.75rem;
-            font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 1.5px;
+        }
+
+        .mockup-subtitle {
+            font-size: 0.65rem;
+            color: #00d4ff;
+            letter-spacing: 3px;
+            font-weight: 700;
             text-transform: uppercase;
-            color: var(--text-secondary);
+        }
+
+        .mockup-btn {
+            margin-top: 1rem;
+            padding: 0.6rem 1.5rem;
+            background: linear-gradient(90deg, #00d4ff, #ff6b9d, #c44dff, #ff6b9d, #00d4ff);
+            border: 2px solid white;
+            border-radius: 0;
+            color: #000;
+            font-weight: 800;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
         }
 
         /* Stats */
         .stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
+            gap: 2rem;
             margin-top: 3rem;
         }
 
         .stat {
             text-align: center;
-            padding: 2rem 1.5rem;
-            background: var(--bg-card);
+            padding: 2rem;
+            background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-
-        .stat:hover {
-            border-color: var(--border-light);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            border-radius: 12px;
         }
 
         .stat-value {
-            font-size: 2.2rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--accent), #ff6b9d);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
         }
 
         .stat-label {
             font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-top: 0.4rem;
+            color: var(--muted);
+            margin-top: 0.25rem;
         }
 
         /* Privacy */
         .privacy-section {
-            background: var(--bg-card);
+            background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 3rem;
         }
 
         .privacy-section h3 {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 700;
             margin-top: 2rem;
             margin-bottom: 0.5rem;
-            color: var(--text);
         }
 
-        .privacy-section h3:first-of-type { margin-top: 0; }
+        .privacy-section h3:first-of-type {
+            margin-top: 0;
+        }
 
         .privacy-section p, .privacy-section ul {
-            color: var(--text-secondary);
+            color: var(--muted);
             font-size: 0.9rem;
             margin-bottom: 1rem;
         }
 
-        .privacy-section ul { padding-left: 1.5rem; }
-        .privacy-section li { margin-bottom: 0.5rem; }
+        .privacy-section ul {
+            padding-left: 1.5rem;
+        }
+
+        .privacy-section li {
+            margin-bottom: 0.5rem;
+        }
 
         .privacy-updated {
             font-size: 0.8rem;
-            color: var(--text-secondary);
+            color: var(--muted);
             font-style: italic;
             margin-bottom: 2rem;
-            opacity: 0.7;
         }
-
-        .privacy-section a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-
-        .privacy-section a:hover { text-decoration: underline; }
 
         /* Footer */
         footer {
             padding: 3rem 2rem;
             text-align: center;
             border-top: 1px solid var(--border);
-            margin-top: 2rem;
+            margin-top: 4rem;
         }
 
         footer p {
             font-size: 0.85rem;
-            color: var(--text-secondary);
+            color: var(--muted);
         }
 
         footer a {
-            color: var(--text-secondary);
+            color: var(--accent);
             text-decoration: none;
-            transition: color 0.2s;
         }
-
-        footer a:hover { color: var(--text); }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .hero { padding: 8rem 1.5rem 3rem; }
-            .hero h1 { font-size: 2rem; letter-spacing: 2px; }
-            .app-features { grid-template-columns: 1fr; }
-            .screenshots {
-                gap: 0.75rem;
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                justify-content: flex-start;
-                padding: 0 1.5rem;
-                -webkit-overflow-scrolling: touch;
+            .hero h1 { font-size: 2rem; }
+            .app-card {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 2rem;
             }
-            .screenshot-wrapper img { width: 160px; }
+            .app-visual { order: -1; }
             .stats { grid-template-columns: 1fr; }
             nav .nav-links { gap: 1rem; }
             nav .nav-links a { font-size: 0.8rem; }
-            section { padding: 3rem 1.5rem; }
-            .privacy-section { padding: 2rem; }
         }
     </style>
 </head>
@@ -427,19 +388,25 @@
     <nav>
         <div class="nav-inner">
             <a href="#" class="logo">
+                <!-- Lighthouse SVG -->
                 <svg viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="25" r="18" fill="#FFD700" opacity="0.3"/>
-                    <circle cx="50" cy="25" r="12" fill="#FFD700" opacity="0.2"/>
+                    <!-- Glow -->
+                    <circle cx="50" cy="25" r="18" fill="#FFD700" opacity="0.25"/>
+                    <circle cx="50" cy="25" r="12" fill="#FFD700" opacity="0.15"/>
+                    <!-- Roof -->
                     <polygon points="50,15 30,42 70,42" fill="currentColor"/>
+                    <!-- Cabin -->
                     <rect x="33" y="42" width="34" height="18" fill="currentColor"/>
-                    <rect x="42" y="47" width="16" height="9" fill="#0c0c14"/>
+                    <!-- Window -->
+                    <rect x="42" y="47" width="16" height="9" fill="white"/>
+                    <!-- Base -->
                     <polygon points="25,110 35,60 65,60 75,110" fill="currentColor"/>
                 </svg>
                 <span>LH VANTAGE®</span>
             </a>
             <ul class="nav-links">
                 <li><a href="#apps">Apps</a></li>
-                <li><a href="#privacy">Privacy</a></li>
+                <li><a href="/privacy.html">Privacy</a></li>
                 <li><a href="mailto:support@lhvantage.com">Contact</a></li>
             </ul>
         </div>
@@ -448,72 +415,63 @@
     <!-- Hero -->
     <div class="hero">
         <svg viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="25" r="24" fill="#FFD700" opacity="0.2"/>
-            <circle cx="50" cy="25" r="16" fill="#FFD700" opacity="0.12"/>
-            <polygon points="50,15 30,42 70,42" fill="#f0f0f5"/>
-            <rect x="33" y="42" width="34" height="18" fill="#f0f0f5"/>
-            <rect x="42" y="47" width="16" height="9" fill="#0c0c14"/>
-            <polygon points="25,110 35,60 65,60 75,110" fill="#f0f0f5"/>
+            <circle cx="50" cy="25" r="22" fill="#FFD700" opacity="0.2"/>
+            <circle cx="50" cy="25" r="14" fill="#FFD700" opacity="0.12"/>
+            <polygon points="50,15 30,42 70,42" fill="#1a1a1a"/>
+            <rect x="33" y="42" width="34" height="18" fill="#1a1a1a"/>
+            <rect x="42" y="47" width="16" height="9" fill="white"/>
+            <polygon points="25,110 35,60 65,60 75,110" fill="#1a1a1a"/>
         </svg>
         <h1>LH VANTAGE<sup>®</sup></h1>
         <p class="tagline">Hobby coding & app creation</p>
         <p class="description">We build thoughtful mobile apps that solve real problems for music lovers and beyond.</p>
     </div>
 
-    <div class="section-divider"></div>
-
     <!-- Apps Section -->
     <section id="apps">
         <p class="section-label">Our Apps</p>
+        <h2 class="section-title">Setlist Builder</h2>
+        <p class="section-subtitle">Know every song before you get to the show. Reduce hours of manual research to 30 seconds.</p>
 
-        <div class="app-showcase-header">
-            <img src="images/app-icon.png" alt="Setlist Builder app icon">
-            <div>
+        <div class="app-card">
+            <div class="app-info">
                 <h3>Setlist Builder</h3>
-                <span class="app-subtitle">iOS • Free</span>
-            </div>
-        </div>
+                <p class="app-subtitle">iOS • Free</p>
+                <p>
+                    Setlist Builder aggregates recent setlists from an artist's current tour via the Setlist.fm API,
+                    analyzes song frequency across performances to predict the likely setlist, and automatically
+                    creates playlists on your preferred music platform.
+                </p>
 
-        <p class="app-description">
-            Know every song before you get to the show. Setlist Builder aggregates recent setlists from an artist's
-            current tour, analyzes song frequency across performances to predict the likely setlist, and automatically
-            creates playlists on your preferred music platform — all in under 30 seconds.
-        </p>
+                <ul class="app-features">
+                    <li>Analyzes setlists to predict what songs an artist will play</li>
+                    <li>Auto-creates playlists on Apple Music or YouTube Music</li>
+                    <li>Intelligent song matching with streamability verification</li>
+                    <li>Share playlists so your whole group can prepare together</li>
+                    <li>Customizable date ranges — recent tour or entire career</li>
+                    <li>Retro MTV mode for a fun throwback vibe</li>
+                </ul>
 
-        <ul class="app-features">
-            <li>Predicts what songs an artist will play</li>
-            <li>Auto-creates Apple Music playlists</li>
-            <li>YouTube Music playlist creation</li>
-            <li>Intelligent song matching</li>
-            <li>Streamability verification</li>
-            <li>Share playlists with friends</li>
-            <li>Customizable date ranges</li>
-            <li>Retro MTV mode</li>
-        </ul>
+                <div class="platform-badges">
+                    <span class="badge">🍎 Apple Music</span>
+                    <span class="badge">▶️ YouTube Music</span>
+                    <span class="badge">📊 Setlist.fm Data</span>
+                </div>
+            </div>
 
-        <div class="platform-badges">
-            <span class="badge">🍎 Apple Music</span>
-            <span class="badge">▶️ YouTube Music</span>
-            <span class="badge">📊 Setlist.fm Data</span>
-        </div>
-
-        <!-- Real Screenshots -->
-        <div class="screenshots">
-            <div class="screenshot-wrapper">
-                <img src="images/screenshot-search.jpg" alt="Search for any artist">
-                <div class="screenshot-label">Search</div>
-            </div>
-            <div class="screenshot-wrapper">
-                <img src="images/screenshot-results.jpg" alt="Review your results">
-                <div class="screenshot-label">Review Results</div>
-            </div>
-            <div class="screenshot-wrapper">
-                <img src="images/screenshot-preview.jpg" alt="Create playlists">
-                <div class="screenshot-label">Create Playlist</div>
-            </div>
-            <div class="screenshot-wrapper">
-                <img src="images/screenshot-apple-music.jpg" alt="Works with Apple Music">
-                <div class="screenshot-label">Apple Music</div>
+            <div class="app-visual">
+                <div class="app-mockup">
+                    <div class="app-mockup-inner">
+                        <div class="mockup-title">SETLIST</div>
+                        <div class="mockup-subtitle">Playlist Builder</div>
+                        <div style="width: 70%; height: 1px; background: linear-gradient(90deg, transparent, #ff6b9d, transparent);"></div>
+                        <div style="color: #00d4ff; font-size: 0.6rem; letter-spacing: 2px; font-weight: 700;">▶ ARTIST</div>
+                        <div style="border: 1px solid #ff6b9d; padding: 8px 16px; width: 80%;">
+                            <span style="color: #666; font-size: 0.65rem; font-family: monospace;">Enter artist name</span>
+                        </div>
+                        <div class="mockup-btn">CREATE PLAYLIST</div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -532,8 +490,6 @@
             </div>
         </div>
     </section>
-
-    <div class="section-divider"></div>
 
     <!-- Privacy Section -->
     <section id="privacy">
@@ -582,7 +538,7 @@
             <h3>Contact</h3>
             <p>
                 Questions about this privacy policy? Contact us at
-                <a href="mailto:support@lhvantage.com">support@lhvantage.com</a>.
+                <a href="mailto:support@lhvantage.com" style="color: var(--accent);">support@lhvantage.com</a>.
             </p>
         </div>
     </section>
@@ -591,7 +547,7 @@
     <footer>
         <p>&copy; 2026 LH Vantage®. All rights reserved.</p>
         <p style="margin-top: 0.5rem;">
-            <a href="#privacy">Privacy Policy</a> &nbsp;·&nbsp; <a href="mailto:support@lhvantage.com">support@lhvantage.com</a>
+            <a href="/privacy.html">Privacy Policy</a> · <a href="mailto:support@lhvantage.com">support@lhvantage.com</a>
         </p>
     </footer>
 
