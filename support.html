@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support & FAQ — LH Vantage</title>
+    <meta name="description" content="Frequently asked questions and support for Setlist Builder and other LH Vantage apps.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fafafa;
+            --text: #1a1a1a;
+            --muted: #666;
+            --accent: #e63946;
+            --accent2: #457b9d;
+            --card-bg: #ffffff;
+            --border: #e5e5e5;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(250, 250, 250, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 0 2rem;
+        }
+
+        nav .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        nav .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        nav .logo svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        nav .logo span {
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav .nav-links a {
+            text-decoration: none;
+            color: var(--muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav .nav-links a:hover { color: var(--text); }
+
+        .content {
+            padding: 8rem 2rem 4rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.05rem;
+            color: var(--muted);
+            margin-bottom: 3rem;
+        }
+
+        .faq-category {
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent2);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .faq-category:first-of-type {
+            margin-top: 0;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .faq-item h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+            color: var(--text);
+        }
+
+        .faq-item p,
+        .faq-item ul {
+            color: var(--muted);
+            font-size: 0.95rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .faq-item p:last-child,
+        .faq-item ul:last-child {
+            margin-bottom: 0;
+        }
+
+        .faq-item ul {
+            padding-left: 1.5rem;
+        }
+
+        .faq-item li {
+            margin-bottom: 0.35rem;
+        }
+
+        .faq-item a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .faq-item a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .contact-card h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-card a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-card a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+        }
+
+        footer a {
+            color: var(--muted);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: var(--text);
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 6rem 1.5rem 3rem;
+            }
+
+            .faq-item {
+                padding: 1.25rem 1.25rem;
+            }
+
+            .contact-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="/" class="logo">
+                <svg viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="25" r="18" fill="#FFD700" opacity="0.25"/>
+                    <circle cx="50" cy="25" r="12" fill="#FFD700" opacity="0.15"/>
+                    <polygon points="50,15 30,42 70,42" fill="currentColor"/>
+                    <rect x="33" y="42" width="34" height="18" fill="currentColor"/>
+                    <rect x="42" y="47" width="16" height="9" fill="white"/>
+                    <polygon points="25,110 35,60 65,60 75,110" fill="currentColor"/>
+                </svg>
+                <span>LH VANTAGE</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/#apps">Apps</a></li>
+                <li><a href="/support.html">Support</a></li>
+                <li><a href="/privacy.html">Privacy</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content">
+        <p class="section-label">Help</p>
+        <h1 class="section-title">Support & FAQ</h1>
+        <p class="section-subtitle">Common questions about Setlist Builder. Don't see your question? Email us — we read every message.</p>
+
+        <p class="faq-category">Getting Started</p>
+
+        <div class="faq-item">
+            <h3>What does Setlist Builder do?</h3>
+            <p>Setlist Builder analyzes recent live setlists for any artist on setlist.fm, ranks the most-played songs, and lets you create a playlist of those songs in Apple Music or YouTube Music. Pick an artist, choose a date range, and tap a service — the app handles the rest.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Which music services does it work with?</h3>
+            <ul>
+                <li><strong>Apple Music</strong> — Requires an active Apple Music subscription.</li>
+                <li><strong>YouTube Music</strong> — Works with both Free and Premium accounts.</li>
+            </ul>
+            <p>Using a different service? See <a href="#other-services">below</a> — you can still copy the song list and create the playlist manually.</p>
+        </div>
+
+        <p class="faq-category">YouTube Music</p>
+
+        <div class="faq-item">
+            <h3>Why does YouTube Music say my account can't create a playlist?</h3>
+            <p>This usually means one of two things:</p>
+            <ul>
+                <li><strong>You don't have a YouTube channel yet.</strong> A YouTube channel is required to create playlists, even on Free accounts. Sign in to <a href="https://youtube.com">youtube.com</a> in a browser, tap your profile picture, and choose "Create a channel." Then try again in the app.</li>
+                <li><strong>Your account is family-managed.</strong> If your Google account is supervised through Family Link, your parent or admin may have YouTube restricted. See the next question for details.</li>
+            </ul>
+            <p>Quick test: if you can manually create a playlist on the YouTube website, the app will work. If you can't, the restriction is at the Google account level and the app can't bypass it.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Do I need YouTube Music Premium?</h3>
+            <p>No. The app works with both <strong>YouTube Music Free</strong> and <strong>YouTube Music Premium</strong>. Premium gives you ad-free playback and offline downloads, but the playlist-creation feature itself works for either tier.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Can my child use this with their family-managed Google account?</h3>
+            <p>It depends on their age and the parent's settings. Google's YouTube Data API enforces age-based restrictions that no third-party app can override.</p>
+            <ul>
+                <li>If the child is under the digital consent age (13 in the US, 14–16 in much of Europe), YouTube playlist creation is blocked at the API level no matter what.</li>
+                <li>If the child is older, the parent should open <strong>Family Link → child's account → Controls → Content restrictions → YouTube</strong> and allow YouTube. The child also needs to have created a YouTube channel.</li>
+                <li>Manual test: have the child sign in to youtube.com in a browser and try to create a playlist. If that works, the app will too.</li>
+            </ul>
+        </div>
+
+        <p class="faq-category">Apple Music</p>
+
+        <div class="faq-item">
+            <h3>Do I need an Apple Music subscription?</h3>
+            <p>Yes — an active Apple Music subscription is required to create playlists in Apple Music. The app uses Apple's MusicKit framework, which only works with subscribers.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Why are some songs missing from my Apple Music playlist?</h3>
+            <p>The app only adds songs that Apple Music can stream. Sometimes a track exists in the catalog but isn't available for streaming in your region, or it's only on a compilation that isn't streamable. Those songs are skipped, and you'll see them listed as "failed" in the success summary.</p>
+        </div>
+
+        <p class="faq-category">Live Versions</p>
+
+        <div class="faq-item">
+            <h3>What does "Prioritize Live Versions" do?</h3>
+            <p>When the toggle is on, the app searches for live recordings of each song before falling back to studio versions. Live tracks that match the artist and song name are picked first; if no live recording is found in your music service's catalog, the studio version is used instead.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Why are some songs still studio recordings even with the toggle on?</h3>
+            <p>The toggle is a best-effort search, not a guarantee. Reasons a studio version may still appear:</p>
+            <ul>
+                <li>The artist hasn't released an official live version of that song on the streaming service.</li>
+                <li>The live recording exists but isn't streamable in your region.</li>
+                <li>The live track's title doesn't include the song name (some live albums use track names like "Track 4 (Live at Wembley)").</li>
+            </ul>
+            <p>If a live version exists in the service's catalog with a normal title, the app will find it.</p>
+        </div>
+
+        <p class="faq-category">General</p>
+
+        <div class="faq-item">
+            <h3>How accurate are the song rankings?</h3>
+            <p>The rankings are based on how often each song appears in the artist's setlists on setlist.fm during your selected date range. They're a reasonable proxy for "what does this artist play live most often," but they depend on fan-submitted setlists — small artists or recent shows may have less data.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>How is my data handled?</h3>
+            <p>Setlist Builder doesn't collect, store, or transmit any personal data to LH Vantage servers. Auth tokens for music services are stored locally in your iPhone's Keychain. Recent searches are saved on-device only. See the <a href="/privacy.html">Privacy Policy</a> for full detail.</p>
+        </div>
+
+        <div class="faq-item" id="other-services">
+            <h3>Can I use Setlist Builder with Spotify, Tidal, Amazon Music, or another service?</h3>
+            <p>Direct playlist creation is currently only supported on Apple Music and YouTube Music — but you can still get most of the way there with any service.</p>
+            <p>From the results screen, tap <strong>Copy Song List</strong> or <strong>Share Song List</strong> to grab the full ranked list of songs. Open your music app of choice, paste each song into search, and add it to a new playlist. The hardest part — figuring out which songs the artist actually plays live — is already done for you.</p>
+        </div>
+
+        <div class="contact-card">
+            <h2>Still need help?</h2>
+            <p>If your question isn't answered above, send us an email and we'll get back to you.</p>
+            <a href="mailto:support@lhvantage.com">support@lhvantage.com</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 LH Vantage. All rights reserved.</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="/">Home</a> · <a href="/privacy.html">Privacy</a> · <a href="mailto:support@lhvantage.com">support@lhvantage.com</a>
+        </p>
+    </footer>
+
+</body>
+</html>
