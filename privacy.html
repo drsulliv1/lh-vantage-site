@@ -206,7 +206,7 @@
         <p class="section-subtitle">Your privacy matters. Here's exactly how our apps handle your data.</p>
 
         <div class="privacy-section">
-            <p class="privacy-updated">Last updated: March 19, 2026</p>
+            <p class="privacy-updated">Last updated: April 28, 2026</p>
 
             <h3>Overview</h3>
             <p>
@@ -216,16 +216,38 @@
 
             <h3>Data We Collect</h3>
             <p>
-                <strong>We do not collect, store, or share any personal data.</strong> All preferences and playlist
-                information remain locally on your device. No data is sent to remote servers operated by LH Vantage.
+                <strong>We do not collect, store, or share any personal data on remote servers.</strong>
+                No information about you, your searches, or your playlists is transmitted to LH Vantage.
             </p>
+            <p>The following data is stored only on your device:</p>
+            <ul>
+                <li><strong>Recent searches</strong> — Saved in iOS UserDefaults so you can quickly re-run prior searches.</li>
+                <li><strong>Authentication tokens</strong> — When you sign in to YouTube Music, OAuth tokens are stored in the iOS Keychain (encrypted by iOS). These tokens are used only by Setlist Builder to interact with YouTube on your behalf, and are never transmitted to LH Vantage or any other party.</li>
+                <li><strong>Apple Music authorization</strong> — Managed entirely by iOS through the MusicKit framework. Setlist Builder doesn't store any Apple Music credentials directly.</li>
+            </ul>
 
             <h3>Third-Party Services</h3>
-            <p>The app interfaces with the following services, each governed by their own privacy policies:</p>
+            <p>The app interfaces with the following services to provide its core features. Each is governed by its own privacy policy:</p>
             <ul>
-                <li><strong>Apple Music</strong> — Used to create and manage playlists in your library via the native MusicKit framework.</li>
-                <li><strong>YouTube / Google</strong> — Used for YouTube Music playlist creation via the YouTube Data API v3. Requires Google sign-in with YouTube scope.</li>
-                <li><strong>Setlist.fm</strong> — Used to retrieve concert setlist data. No user account required.</li>
+                <li><strong>Apple Music</strong> — Used to create and manage playlists in your library via the native MusicKit framework. Requires an active Apple Music subscription.</li>
+                <li><strong>YouTube / Google</strong> — Used for YouTube Music playlist creation via the YouTube Data API v3. Requires Google sign-in with the YouTube scope.</li>
+                <li><strong>Setlist.fm</strong> — Queried for an artist's recent setlists. The artist name you search for is sent to Setlist.fm; no personal data is sent.</li>
+                <li><strong>MusicBrainz</strong> — Used to look up artist metadata and album cover art. The artist name is sent to MusicBrainz; no personal data is sent.</li>
+                <li><strong>iTunes Search API</strong> — Queried as a fallback for cover art when MusicBrainz has none, and used to verify song matches before adding tracks to Apple Music. The artist and song names are sent to Apple's iTunes Search API; no personal data is sent.</li>
+            </ul>
+
+            <h3>Google API Services Compliance</h3>
+            <p>
+                Setlist Builder's use of information received from Google APIs adheres to the
+                <a href="https://developers.google.com/terms/api-services-user-data-policy" style="color: var(--accent);">Google API Services User Data Policy</a>,
+                including the Limited Use requirements.
+            </p>
+            <ul>
+                <li>YouTube account data is used <strong>only</strong> to create the playlist you request.</li>
+                <li>YouTube data is <strong>not</strong> sold, transferred to third parties, or used for advertising or any other purpose.</li>
+                <li>OAuth tokens issued by Google are stored only on your device, in the iOS Keychain. They are never transmitted to LH Vantage servers.</li>
+                <li>You can revoke Setlist Builder's access to your Google account at any time at
+                    <a href="https://myaccount.google.com/permissions" style="color: var(--accent);">myaccount.google.com/permissions</a>.</li>
             </ul>
 
             <h3>Permissions</h3>
@@ -240,7 +262,28 @@
             <h3>Data Deletion</h3>
             <p>
                 Since no personal data is collected or stored on our servers, you can delete all local app data by
-                uninstalling the app or clearing app data through your device's Settings.
+                uninstalling the app or clearing app data through your device's Settings. Revoking the app's access
+                to your Google account (link above) will also invalidate any stored OAuth tokens.
+            </p>
+
+            <h3>Children's Privacy</h3>
+            <p>
+                Setlist Builder is not directed at children under 13, or under the digital consent age in your country
+                (which may be higher). We do not knowingly collect any personal information from children. If you are a
+                parent or guardian and believe your child has used the app in a way inconsistent with this policy,
+                please contact us at
+                <a href="mailto:support@lhvantage.com" style="color: var(--accent);">support@lhvantage.com</a>.
+            </p>
+            <p>
+                YouTube Music access through Setlist Builder relies on Google's authentication and is subject to
+                Google's own age restrictions and Family Link parental controls. Some features may be restricted or
+                unavailable for family-managed Google accounts at Google's discretion.
+            </p>
+
+            <h3>Changes to This Policy</h3>
+            <p>
+                We may update this privacy policy from time to time. Any changes will be reflected on this page
+                along with an updated "Last updated" date. We encourage you to review this policy periodically.
             </p>
 
             <h3>Contact</h3>
