@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What's Going On — LH Vantage</title>
+    <meta name="description" content="What's Going On keeps the whole family on the same page — a shared calendar, shopping list, to-dos, recipes, and live weather, all synced in real time across every family member's iPhone.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fafafa;
+            --text: #1a1a1a;
+            --muted: #666;
+            --accent: #e63946;
+            --accent2: #457b9d;
+            --brand: #5a8265;
+            --brand-deep: #3f5e48;
+            --brand-soft: #eef4f0;
+            --brand-border: #cfddd4;
+            --card-bg: #ffffff;
+            --border: #e5e5e5;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(250, 250, 250, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 0 2rem;
+        }
+
+        nav .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        nav .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        nav .logo svg { width: 32px; height: 32px; }
+
+        nav .logo span {
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav .nav-links a {
+            text-decoration: none;
+            color: var(--muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav .nav-links a:hover { color: var(--text); }
+
+        /* Dropdown */
+        .nav-dropdown { position: relative; display: flex; align-items: center; }
+
+        .nav-dropdown-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            font-family: inherit;
+            padding: 0;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-dropdown-btn:hover { color: var(--text); }
+        .nav-dropdown-btn .caret { font-size: 0.65rem; transition: transform 0.2s; display: inline-block; }
+        .nav-dropdown.open .nav-dropdown-btn .caret { transform: rotate(180deg); }
+
+        .nav-dropdown-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            list-style: none;
+            min-width: 190px;
+            padding: 0.4rem 0;
+            z-index: 200;
+        }
+
+        .nav-dropdown.open .nav-dropdown-menu { display: block; }
+
+        .nav-dropdown-menu li a {
+            display: block;
+            padding: 0.6rem 1rem;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.15s, background 0.15s;
+        }
+
+        .nav-dropdown-menu li a:hover { color: var(--text); background: var(--bg); }
+
+        /* Hero */
+        .product-hero {
+            padding: 9rem 2rem 4rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .product-hero .icon {
+            width: 160px;
+            height: 160px;
+            border-radius: 36px;
+            box-shadow: 0 20px 50px rgba(90, 130, 101, 0.25);
+            display: block;
+            object-fit: cover;
+        }
+
+        .product-hero .meta .eyebrow {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--brand);
+            margin-bottom: 0.75rem;
+        }
+
+        .product-hero h1 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            letter-spacing: -0.5px;
+        }
+
+        .product-hero .tagline {
+            font-size: 1.2rem;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+            max-width: 540px;
+        }
+
+        .platform-row {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.75rem;
+        }
+
+        .platform-pill {
+            padding: 0.35rem 0.75rem;
+            background: var(--brand-soft);
+            color: var(--brand-deep);
+            border-radius: 14px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            border: 1px solid var(--brand-border);
+        }
+
+        .preview-pill {
+            padding: 0.35rem 0.75rem;
+            background: #fff7d6;
+            color: #856a00;
+            border-radius: 14px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            border: 1px solid #f5e3a3;
+        }
+
+        .cta-row {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-row .badge-soon {
+            padding: 0.6rem 1.2rem;
+            background: #fff;
+            color: var(--text);
+            border: 1.5px dashed var(--border);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Preview banner */
+        .preview-banner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .preview-banner-inner {
+            background: linear-gradient(135deg, #fff9e5, #fff4cf);
+            border: 1px solid #f5e3a3;
+            border-radius: 12px;
+            padding: 1.25rem 1.75rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .preview-banner-inner .icon-warn {
+            font-size: 1.5rem;
+        }
+
+        .preview-banner-inner p {
+            font-size: 0.92rem;
+            color: var(--text);
+            margin: 0;
+        }
+
+        .preview-banner-inner strong { color: #856a00; }
+
+        /* Sections */
+        section.block {
+            padding: 4rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--brand);
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title {
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.3px;
+        }
+
+        .section-subtitle {
+            font-size: 1.05rem;
+            color: var(--muted);
+            max-width: 640px;
+            margin-bottom: 2.5rem;
+        }
+
+        .highlights {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .highlight {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.75rem;
+        }
+
+        .highlight .icon-bubble {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: var(--brand-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .highlight h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight p {
+            font-size: 0.92rem;
+            color: var(--muted);
+        }
+
+        /* Screenshot showcase */
+        .showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 3rem;
+        }
+
+        .showcase-image img {
+            width: 100%;
+            max-width: 280px;
+            display: block;
+            margin: 0 auto;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .showcase-text h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .showcase-text p {
+            color: var(--muted);
+            margin-bottom: 0.75rem;
+        }
+
+        /* Feature list */
+        .feature-list {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 2rem 2.5rem;
+        }
+
+        .feature-list ul { list-style: none; }
+
+        .feature-list li {
+            padding: 0.75rem 0;
+            font-size: 0.95rem;
+            color: var(--text);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .feature-list li:last-child { border-bottom: 0; }
+
+        .feature-list li::before {
+            content: "✓";
+            color: var(--brand);
+            font-weight: 700;
+            flex-shrink: 0;
+            font-size: 1.05rem;
+        }
+
+        .feature-list li strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        /* Integrations */
+        .integrations {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .integration {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .integration .icon-big {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .integration h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+
+        .integration p {
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        /* Privacy callout */
+        .privacy-callout {
+            background: linear-gradient(135deg, var(--brand-soft), #e3ede6);
+            border: 1px solid var(--brand-border);
+            border-radius: 14px;
+            padding: 2rem 2.5rem;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .privacy-callout .lock { font-size: 2rem; }
+
+        .privacy-callout p {
+            font-size: 0.95rem;
+            color: var(--text);
+            margin: 0;
+        }
+
+        .privacy-callout strong { color: var(--brand-deep); }
+
+        .privacy-callout a {
+            padding: 0.6rem 1.1rem;
+            border: 1.5px solid var(--brand);
+            color: var(--brand);
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .privacy-callout a:hover {
+            background: var(--brand);
+            color: white;
+        }
+
+        .privacy-callout .pending {
+            padding: 0.6rem 1.1rem;
+            background: #fff;
+            color: var(--muted);
+            border: 1.5px dashed var(--border);
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 3rem;
+        }
+
+        footer a { color: var(--muted); text-decoration: none; }
+        footer a:hover { color: var(--text); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .product-hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 7rem 1.5rem 3rem;
+                gap: 2rem;
+            }
+            .product-hero .icon { margin: 0 auto; width: 120px; height: 120px; }
+            .product-hero h1 { font-size: 2rem; }
+            .product-hero .tagline { font-size: 1.05rem; margin-left: auto; margin-right: auto; }
+            .platform-row { justify-content: center; }
+            .cta-row { justify-content: center; }
+
+            .preview-banner { padding: 0 1.5rem; }
+
+            section.block { padding: 3rem 1.5rem; }
+
+            .highlights { grid-template-columns: 1fr; gap: 1rem; }
+            .integrations { grid-template-columns: 1fr; gap: 1rem; }
+
+            .showcase {
+                grid-template-columns: 1fr;
+                padding: 2rem 1.5rem;
+                gap: 2rem;
+            }
+
+            .feature-list { padding: 1.5rem; }
+
+            .privacy-callout {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 1.5rem;
+            }
+
+            .privacy-callout a,
+            .privacy-callout .pending { justify-self: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="/" class="logo">
+                <svg viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="25" r="18" fill="#FFD700" opacity="0.25"/>
+                    <circle cx="50" cy="25" r="12" fill="#FFD700" opacity="0.15"/>
+                    <polygon points="50,15 30,42 70,42" fill="currentColor"/>
+                    <rect x="33" y="42" width="34" height="18" fill="currentColor"/>
+                    <rect x="42" y="47" width="16" height="9" fill="white"/>
+                    <polygon points="25,110 35,60 65,60 75,110" fill="currentColor"/>
+                </svg>
+                <span>LH VANTAGE</span>
+            </a>
+            <ul class="nav-links">
+                <li class="nav-dropdown">
+                    <button class="nav-dropdown-btn">Apps <span class="caret">▾</span></button>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="/apps/setlist-builder.html">Setlist Builder</a></li>
+                        <li><a href="/apps/simmer-down.html">Simmer Down</a></li>
+                        <li><a href="/apps/whats-going-on.html">What's Going On</a></li>
+                    </ul>
+                </li>
+                <li class="nav-dropdown">
+                    <button class="nav-dropdown-btn">Support <span class="caret">▾</span></button>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="/support.html">Setlist Builder</a></li>
+                        <li><a href="/support/simmer-down.html">Simmer Down</a></li>
+                    </ul>
+                </li>
+                <li class="nav-dropdown">
+                    <button class="nav-dropdown-btn">Privacy <span class="caret">▾</span></button>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="/privacy.html">Setlist Builder</a></li>
+                        <li><a href="/privacy/simmerdown.html">Simmer Down</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="product-hero">
+        <img src="/images/whats-going-on-icon.png" alt="What's Going On app icon" class="icon">
+        <div class="meta">
+            <p class="eyebrow">Family &amp; Daily Life</p>
+            <h1>What's Going On</h1>
+            <p class="tagline">
+                A shared family dashboard: yesterday, today, and tomorrow at a glance — with a shopping list,
+                to-dos, recipes, and live weather, all synced in real time across every iPhone in the house.
+            </p>
+            <div class="platform-row">
+                <span class="platform-pill">iOS</span>
+                <span class="preview-pill">Limited Preview</span>
+            </div>
+            <div class="cta-row">
+                <span class="badge-soon">Not yet on the App Store</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Preview banner -->
+    <div class="preview-banner">
+        <div class="preview-banner-inner">
+            <span class="icon-warn">🚧</span>
+            <p>
+                <strong>Limited Preview.</strong> What's Going On is currently running for our own family
+                while we polish it. We're not taking new sign-ups yet. Sign up for updates by emailing
+                <a href="mailto:support@lhvantage.com" style="color: var(--brand-deep); font-weight: 600;">support@lhvantage.com</a>.
+            </p>
+        </div>
+    </div>
+
+    <!-- Highlights -->
+    <section class="block">
+        <p class="section-label">Why We Built It</p>
+        <h2 class="section-title">One screen for what the family needs to know today.</h2>
+        <p class="section-subtitle">
+            Family calendars are usually scattered across three apps and a fridge whiteboard. What's
+            Going On pulls everything that matters today into one quiet, glanceable view — and keeps it
+            in sync between everyone's phones.
+        </p>
+
+        <div class="highlights">
+            <div class="highlight">
+                <div class="icon-bubble">📅</div>
+                <h3>Yesterday, today, tomorrow</h3>
+                <p>Three pages. Swipe between them. See what just happened, what's happening now, and what's coming — without scrubbing through a month view.</p>
+            </div>
+
+            <div class="highlight">
+                <div class="icon-bubble">🔁</div>
+                <h3>Live family sync</h3>
+                <p>Everyone in the family sees the same calendar, shopping list, and to-dos. Changes show up on every device within seconds.</p>
+            </div>
+
+            <div class="highlight">
+                <div class="icon-bubble">🛒</div>
+                <h3>Shared shopping &amp; to-dos</h3>
+                <p>One shopping list for the whole household. A separate "Dad to-dos" list for the things only one person remembers.</p>
+            </div>
+
+            <div class="highlight">
+                <div class="icon-bubble">📖</div>
+                <h3>Recipe holder</h3>
+                <p>Save recipes by URL and pull ingredients into the shopping list. (Now a standalone app — <a href="/apps/simmer-down.html" style="color: var(--brand); font-weight: 600;">Simmer Down</a>.)</p>
+            </div>
+
+            <div class="highlight">
+                <div class="icon-bubble">☁️</div>
+                <h3>Live weather</h3>
+                <p>WeatherKit shows today and tomorrow's forecast at the top of the day view, so you know if soccer practice is happening.</p>
+            </div>
+
+            <div class="highlight">
+                <div class="icon-bubble">🔔</div>
+                <h3>Recurring chores</h3>
+                <p>Trash day, recycling, school pickup — set a recurrence rule once, and the task shows up on the right days forever.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Showcase -->
+    <section class="block">
+        <p class="section-label">A Glance</p>
+        <h2 class="section-title">Designed to look like a notebook.</h2>
+
+        <div class="showcase">
+            <div class="showcase-image">
+                <img src="/images/screenshot-wgo.png" alt="What's Going On screenshot">
+            </div>
+            <div class="showcase-text">
+                <h3>Warm, quiet, and out of the way.</h3>
+                <p>
+                    What's Going On uses a serif typeface and warm cream palette on purpose — it should feel
+                    more like a kitchen notebook than a Notification Center.
+                </p>
+                <p>
+                    Calendar events from Google Calendar show alongside manual family tasks, with each
+                    family member's items color-coded. Tap to mark done, swipe to delete, drag to
+                    reorder.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Integrations -->
+    <section class="block">
+        <p class="section-label">Integrations</p>
+        <h2 class="section-title">Plays well with what you already use.</h2>
+
+        <div class="integrations">
+            <div class="integration">
+                <div class="icon-big">📅</div>
+                <h4>Google Calendar</h4>
+                <p>Subscribe to each family member's calendar via iCal URL. Events appear automatically alongside manual tasks.</p>
+            </div>
+
+            <div class="integration">
+                <div class="icon-big">☁️</div>
+                <h4>Apple WeatherKit</h4>
+                <p>Local weather for today and tomorrow at the top of the day view.</p>
+            </div>
+
+            <div class="integration">
+                <div class="icon-big">🔥</div>
+                <h4>Firebase Sync</h4>
+                <p>Real-time sync of shared family data across every device. Anonymous accounts — no email required.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed features -->
+    <section class="block">
+        <p class="section-label">Features</p>
+        <h2 class="section-title">What's in the preview.</h2>
+
+        <div class="feature-list">
+            <ul>
+                <li><strong>Three-day window</strong> — Yesterday, today, and tomorrow pages with swipe navigation. No calendar grid, no month view — just the days that matter right now.</li>
+                <li><strong>Manual + calendar items</strong> — Add a one-off task ("Bring oranges to soccer") or subscribe to a Google Calendar via iCal. Both show up together, sorted by time.</li>
+                <li><strong>Family members &amp; colors</strong> — Each family member gets a colored dot. Tag items to a person so it's clear who they're for.</li>
+                <li><strong>Tags</strong> — Group items by category (school, work, kids, errands) with custom colors.</li>
+                <li><strong>Recurring tasks</strong> — Daily, weekly, biweekly, or weekdays-only recurrence with smart skip handling.</li>
+                <li><strong>Pin important items</strong> — Stick today's most important task to the top.</li>
+                <li><strong>Shopping list</strong> — One shared list. Tap to mark bought, swipe to delete, drag to reorder. Active and done items are separated.</li>
+                <li><strong>Dad to-dos</strong> — A second, separate list for chores that need one person's attention.</li>
+                <li><strong>Recipe holder</strong> — Save recipes with URLs, pull ingredients into the shopping list. (Now spun out into <a href="/apps/simmer-down.html" style="color: var(--brand); font-weight: 600;">Simmer Down</a>.)</li>
+                <li><strong>Live weather</strong> — Today's conditions, high/low, and tomorrow's preview from WeatherKit.</li>
+                <li><strong>Family sharing via code</strong> — 6-character invite codes; rotate at any time; remove members with one tap.</li>
+                <li><strong>Background sync</strong> — Calendar refresh runs on iOS background tasks so the morning view is current when you open the app.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Privacy callout -->
+    <section class="block">
+        <div class="privacy-callout">
+            <span class="lock">🔒</span>
+            <p>
+                <strong>Anonymous family sync.</strong> What's Going On uses anonymous Firebase accounts —
+                no name, email, or phone number required. Family data is shared only with members of your
+                family group.
+            </p>
+            <span class="pending">Privacy policy coming with the public release</span>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 LH Vantage. All rights reserved.</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="/">Home</a> ·
+            <a href="mailto:support@lhvantage.com">support@lhvantage.com</a>
+        </p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.nav-dropdown-btn').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                var parent = this.closest('.nav-dropdown');
+                document.querySelectorAll('.nav-dropdown').forEach(function(d) {
+                    if (d !== parent) d.classList.remove('open');
+                });
+                parent.classList.toggle('open');
+            });
+        });
+        document.addEventListener('click', function() {
+            document.querySelectorAll('.nav-dropdown').forEach(function(d) {
+                d.classList.remove('open');
+            });
+        });
+    </script>
+
+</body>
+</html>
