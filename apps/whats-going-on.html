@@ -359,19 +359,22 @@
             padding: 2rem 2.5rem;
         }
 
-        .feature-list ul { list-style: none; }
+        .feature-list ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: 2.5rem;
+            row-gap: 0;
+        }
 
         .feature-list li {
-            padding: 0.75rem 0;
+            padding: 0.85rem 0;
             font-size: 0.95rem;
             color: var(--text);
             display: flex;
             align-items: flex-start;
             gap: 0.75rem;
-            border-bottom: 1px solid var(--border);
         }
-
-        .feature-list li:last-child { border-bottom: 0; }
 
         .feature-list li::before {
             content: "✓";
@@ -383,6 +386,69 @@
 
         .feature-list li strong {
             color: var(--text);
+            font-weight: 600;
+        }
+
+        /* Resource cards (Privacy + Support side-by-side) */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .resource-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 2rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .resource-card .icon {
+            font-size: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .resource-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .resource-card p {
+            font-size: 0.92rem;
+            color: var(--muted);
+            margin-bottom: 1.25rem;
+            flex: 1;
+        }
+
+        .resource-card a {
+            align-self: flex-start;
+            padding: 0.6rem 1.1rem;
+            border: 1.5px solid var(--brand);
+            color: var(--brand);
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .resource-card a:hover {
+            background: var(--brand);
+            color: white;
+        }
+
+        .resource-card .pending {
+            align-self: flex-start;
+            padding: 0.6rem 1.1rem;
+            background: #fff;
+            color: var(--muted);
+            border: 1.5px dashed var(--border);
+            border-radius: 10px;
+            font-size: 0.85rem;
             font-weight: 600;
         }
 
@@ -506,15 +572,10 @@
             }
 
             .feature-list { padding: 1.5rem; }
+            .feature-list ul { grid-template-columns: 1fr; column-gap: 0; }
 
-            .privacy-callout {
-                grid-template-columns: 1fr;
-                text-align: center;
-                padding: 1.5rem;
-            }
-
-            .privacy-callout a,
-            .privacy-callout .pending { justify-self: center; }
+            .resource-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .resource-card { padding: 1.5rem; }
         }
     </style>
 </head>
@@ -714,16 +775,21 @@
         </div>
     </section>
 
-    <!-- Privacy callout -->
+    <!-- Resources: Privacy + Support -->
     <section class="block">
-        <div class="privacy-callout">
-            <span class="lock">🔒</span>
-            <p>
-                <strong>Anonymous family sync.</strong> What's Going On uses anonymous Firebase accounts —
-                no name, email, or phone number required. Family data is shared only with members of your
-                family group.
-            </p>
-            <span class="pending">Privacy policy coming with the public release</span>
+        <div class="resource-grid">
+            <div class="resource-card">
+                <span class="icon">🔒</span>
+                <h3>Privacy</h3>
+                <p>Anonymous family sync — no name, email, or phone required. Family data is shared only with members of your group.</p>
+                <span class="pending">Privacy policy coming with public release</span>
+            </div>
+            <div class="resource-card">
+                <span class="icon">💬</span>
+                <h3>Get in touch</h3>
+                <p>Questions about the Limited Preview or want to be notified when What's Going On opens up? Drop us a note.</p>
+                <a href="mailto:support@lhvantage.com">Email us</a>
+            </div>
         </div>
     </section>
 

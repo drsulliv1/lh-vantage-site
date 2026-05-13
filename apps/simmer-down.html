@@ -322,19 +322,20 @@
 
         .feature-list ul {
             list-style: none;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: 2.5rem;
+            row-gap: 0;
         }
 
         .feature-list li {
-            padding: 0.75rem 0;
+            padding: 0.85rem 0;
             font-size: 0.95rem;
             color: var(--text);
             display: flex;
             align-items: flex-start;
             gap: 0.75rem;
-            border-bottom: 1px solid var(--border);
         }
-
-        .feature-list li:last-child { border-bottom: 0; }
 
         .feature-list li::before {
             content: "✓";
@@ -349,31 +350,74 @@
             font-weight: 600;
         }
 
-        /* Privacy callout */
-        .privacy-callout {
-            background: linear-gradient(135deg, #fff7f2, #fff1ec);
-            border: 1px solid #f5d3c5;
+        /* Screenshot trio — phone screenshots side-by-side */
+        .screenshot-trio {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .screenshot-trio .shot {
+            text-align: center;
+        }
+
+        .screenshot-trio .shot img {
+            width: 100%;
+            max-width: 220px;
+            display: block;
+            margin: 0 auto 1rem;
+            border-radius: 28px;
+            box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+        }
+
+        .screenshot-trio .shot h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .screenshot-trio .shot p {
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        /* Resource cards (Privacy + Support side-by-side) */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .resource-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
             border-radius: 14px;
             padding: 2rem 2.5rem;
-            display: grid;
-            grid-template-columns: auto 1fr auto;
-            gap: 1.5rem;
-            align-items: center;
+            display: flex;
+            flex-direction: column;
         }
 
-        .privacy-callout .lock {
-            font-size: 2rem;
+        .resource-card .icon {
+            font-size: 1.75rem;
+            margin-bottom: 0.75rem;
         }
 
-        .privacy-callout p {
-            font-size: 0.95rem;
+        .resource-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
             color: var(--text);
-            margin: 0;
         }
 
-        .privacy-callout strong { color: var(--simmer-deep); }
+        .resource-card p {
+            font-size: 0.92rem;
+            color: var(--muted);
+            margin-bottom: 1.25rem;
+            flex: 1;
+        }
 
-        .privacy-callout a {
+        .resource-card a {
+            align-self: flex-start;
             padding: 0.6rem 1.1rem;
             border: 1.5px solid var(--simmer);
             color: var(--simmer);
@@ -384,7 +428,7 @@
             transition: all 0.2s;
         }
 
-        .privacy-callout a:hover {
+        .resource-card a:hover {
             background: var(--simmer);
             color: white;
         }
@@ -429,14 +473,15 @@
             }
 
             .feature-list { padding: 1.5rem; }
+            .feature-list ul { grid-template-columns: 1fr; column-gap: 0; }
 
-            .privacy-callout {
+            .screenshot-trio {
                 grid-template-columns: 1fr;
-                text-align: center;
-                padding: 1.5rem;
+                gap: 2.5rem;
             }
 
-            .privacy-callout a { justify-self: center; }
+            .resource-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .resource-card { padding: 1.5rem; }
         }
     </style>
 </head>
@@ -565,6 +610,34 @@
         </div>
     </section>
 
+    <!-- Screenshots -->
+    <section class="block">
+        <p class="section-label">A Glance</p>
+        <h2 class="section-title">Designed to get out of your way.</h2>
+        <p class="section-subtitle">
+            Three places you'll spend most of your time: browsing your recipe library,
+            following a recipe while you cook, and checking the shared shopping list at the store.
+        </p>
+
+        <div class="screenshot-trio">
+            <div class="shot">
+                <img src="/images/simmer-down-recipes.jpg" alt="Simmer Down recipe library">
+                <h4>Your library</h4>
+                <p>Alphabetical, searchable, with favorites pinned to the top.</p>
+            </div>
+            <div class="shot">
+                <img src="/images/simmer-down-detail.jpg" alt="Simmer Down recipe detail view">
+                <h4>The recipe</h4>
+                <p>Just ingredients and steps, in clean serif type. No clutter.</p>
+            </div>
+            <div class="shot">
+                <img src="/images/simmer-down-shopping.jpg" alt="Simmer Down shared shopping list">
+                <h4>Shared shopping list</h4>
+                <p>Send ingredients here in one tap. Check things off as you shop.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Detailed features -->
     <section class="block">
         <p class="section-label">Features</p>
@@ -586,15 +659,21 @@
         </div>
     </section>
 
-    <!-- Privacy callout -->
+    <!-- Resources: Privacy + Support -->
     <section class="block">
-        <div class="privacy-callout">
-            <span class="lock">🔒</span>
-            <p>
-                <strong>Anonymous by design.</strong> Simmer Down doesn't collect your name, email, or location.
-                No ads, no analytics, no tracking. Family data stays inside your family.
-            </p>
-            <a href="/privacy/simmerdown.html">Privacy policy</a>
+        <div class="resource-grid">
+            <div class="resource-card">
+                <span class="icon">🔒</span>
+                <h3>Privacy</h3>
+                <p>Anonymous by design. No name, email, ads, or tracking. Family data stays inside your family.</p>
+                <a href="/privacy/simmerdown.html">Privacy policy</a>
+            </div>
+            <div class="resource-card">
+                <span class="icon">💬</span>
+                <h3>Support &amp; FAQ</h3>
+                <p>Importing a recipe, setting up family sync, or fixing a snag? The FAQ has answers.</p>
+                <a href="/support/simmer-down.html">Support &amp; FAQ</a>
+            </div>
         </div>
     </section>
 
@@ -603,6 +682,7 @@
         <p style="margin-top: 0.5rem;">
             <a href="/">Home</a> ·
             <a href="/privacy/simmerdown.html">Privacy</a> ·
+            <a href="/support/simmer-down.html">Support</a> ·
             <a href="mailto:support@lhvantage.com">support@lhvantage.com</a>
         </p>
     </footer>
