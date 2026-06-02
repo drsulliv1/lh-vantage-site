@@ -560,14 +560,26 @@
         <div class="highlights">
             <div class="highlight">
                 <div class="icon-bubble">🥣</div>
-                <h3>One-tap import</h3>
-                <p>Paste any recipe URL. We pull the title, ingredients, and steps and drop the rest — pop-ups, story, ads, and all.</p>
+                <h3>URL import</h3>
+                <p>Paste any recipe URL. We pull the title, ingredients, and steps and drop the rest — pop-ups, life story, ads, all of it.</p>
+            </div>
+
+            <div class="highlight">
+                <div class="icon-bubble">✨</div>
+                <h3>Smart screenshot &amp; photo import</h3>
+                <p>Got a Facebook screenshot or a photo of a cookbook page? Apple Intelligence reads the image on-device and turns it into a clean recipe.</p>
             </div>
 
             <div class="highlight">
                 <div class="icon-bubble">🛒</div>
                 <h3>Built-in shopping list</h3>
                 <p>Send any recipe's ingredients to your shopping list in one tap. Check things off as you shop. It syncs to everyone in the family.</p>
+            </div>
+
+            <div class="highlight">
+                <div class="icon-bubble">📤</div>
+                <h3>Share to anywhere</h3>
+                <p>Send a recipe via Messages, Mail, Notes, AirDrop — anywhere iOS shares. Title, link, ingredients, and steps all formatted to paste cleanly.</p>
             </div>
 
             <div class="highlight">
@@ -592,20 +604,20 @@
         <div class="how-steps">
             <div class="how-step">
                 <p class="num">STEP 1</p>
-                <h4>Paste the URL</h4>
-                <p>Find a recipe you like online and copy its URL — anywhere from Serious Eats to a food blog with seventeen pop-ups.</p>
+                <h4>Bring in the recipe</h4>
+                <p>Paste a URL, drop in a screenshot, pick a photo from your library, or scan a cookbook page with the camera. Whatever's easiest.</p>
             </div>
 
             <div class="how-step">
                 <p class="num">STEP 2</p>
                 <h4>Tap Import</h4>
-                <p>Simmer Down reads the page, extracts the recipe, and saves a clean version in your library. No login, no signup.</p>
+                <p>Simmer Down extracts the recipe — on-device, no servers — and saves a clean version in your library. No login, no signup.</p>
             </div>
 
             <div class="how-step">
                 <p class="num">STEP 3</p>
                 <h4>Cook</h4>
-                <p>Open the recipe to a clean ingredients-and-steps view. Send the ingredients to your shopping list with one tap.</p>
+                <p>Open the recipe to a clean ingredients-and-steps view. Send the ingredients to your shopping list with one tap, or share the recipe with a friend.</p>
             </div>
         </div>
     </section>
@@ -646,8 +658,15 @@
         <div class="feature-list">
             <ul>
                 <li><strong>Recipe URL import:</strong> Pulls ingredients and steps from JSON-LD recipe markup (used by most modern recipe sites) and from WPRM-style recipe blocks. No screen scraping of unrelated content.</li>
+                <li><strong>Smart screenshot import:</strong> Paste or pick a screenshot of a recipe — Apple Intelligence and Vision OCR read it on-device and extract a structured recipe. Great for Facebook posts you can't otherwise grab.</li>
+                <li><strong>Choose photo from library:</strong> Import a recipe from any photo on your device — cookbook page, recipe card, handwritten note. Same on-device extraction pipeline.</li>
+                <li><strong>Scan with camera:</strong> Point the camera at a recipe and pull it in. Works on cookbooks, magazine clippings, recipe cards, and the kitchen-table whiteboard.</li>
+                <li><strong>Paste text from clipboard:</strong> Copy a recipe from Notes, an email, a Reddit comment — anything text-shaped. Apple Intelligence pulls out the structured recipe.</li>
                 <li><strong>Clean recipe view:</strong> Title, ingredients, steps. That's it. Serif typography that's easy to read at arm's length on the counter.</li>
                 <li><strong>Auto-import on save:</strong> Forget to tap Import? If you save a recipe with just a URL, Simmer Down imports automatically.</li>
+                <li><strong>Drafts that don't disappear:</strong> Start a recipe, switch apps, come back hours later — your in-progress edits are still there. Even after iOS terminates the app.</li>
+                <li><strong>Share to anywhere:</strong> Native iOS share sheet with the full formatted recipe ready to paste into Messages, Mail, Notes, AirDrop, or any other app you've installed.</li>
+                <li><strong>Favorites pinned to top:</strong> Star recipes you cook often. They float to the top of the list and can be filtered with one tap.</li>
                 <li><strong>Shopping list:</strong> Standalone or generated from a recipe's ingredients. Check off items as you shop, reorder by dragging, clear the "done" pile in one tap.</li>
                 <li><strong>Family sharing:</strong> Create a family with a 6-character code. Anyone you share the code with can join and sync recipes + shopping list.</li>
                 <li><strong>Member roster:</strong> See every device in your family in Settings. Rename your device, remove a member's access with one tap.</li>
@@ -655,6 +674,7 @@
                 <li><strong>Cooking Mode:</strong> Keeps the screen awake on recipe pages so your phone doesn't lock with floured hands. Toggle in Settings.</li>
                 <li><strong>iPad split view:</strong> On iPad and Mac, the recipe list sits in a sidebar with the detail in the main pane.</li>
                 <li><strong>Mac app:</strong> Same app, full-window experience. Family syncs across phone, tablet, and desktop.</li>
+                <li><strong>On-device AI, no servers:</strong> All the smart-extraction work runs entirely on your device using Apple's Foundation Models and Vision frameworks. Nothing about your recipes is sent to LH Vantage or any third party for AI processing.</li>
             </ul>
         </div>
     </section>

@@ -316,6 +316,7 @@
 
         <div class="faq-item">
             <h3>How do I import a recipe?</h3>
+            <p>The easiest path is a URL:</p>
             <ol style="padding-left: 1.5rem; color: var(--muted); font-size: 0.95rem;">
                 <li>Tap <strong>Add recipe…</strong> at the bottom of the Recipes tab.</li>
                 <li>Paste the recipe's URL into the <strong>Web URL</strong> field.</li>
@@ -323,13 +324,76 @@
                 <li>Tap <strong>Save</strong>.</li>
             </ol>
             <p>If you forget to tap Import and hit Save, Simmer Down will try to import in the background before saving — so a URL-only recipe is still likely to come out with content.</p>
+            <p>If you don't have a URL — say, you saw the recipe on Facebook or it's in a cookbook on your shelf — expand <strong>▾ More ways to import</strong> in the recipe form and pick from screenshot, photo library, camera, or pasted text. See <a href="#smart-import">Smart Import</a> below.</p>
         </div>
 
         <div class="faq-item">
-            <h3>What if the import fails?</h3>
-            <p>Some recipe pages don't expose their content in a way Simmer Down can read. If import fails, you'll see an error in the URL field's footer. You can still save the recipe with just the URL and type ingredients/steps in manually.</p>
+            <h3>What if the URL import fails?</h3>
+            <p>Some recipe pages don't expose their content in a way Simmer Down can read. If import fails, you'll see an error in the URL field's footer. You can still save the recipe with just the URL and type ingredients/steps in manually — or use one of the smart-import options below to bring the recipe in from a screenshot.</p>
             <p>Sites that <em>usually</em> work well: most major recipe blogs (anything using JSON-LD or the WPRM plugin — that covers a large majority of Pinterest-style recipe sites), Serious Eats, NYT Cooking (with subscription), Bon Appétit, Food52, AllRecipes.</p>
             <p>Sites that <em>usually</em> don't work: paywalled content behind aggressive bot blockers, sites that load content via JavaScript only, and any site that uses non-standard recipe markup.</p>
+        </div>
+
+        <p class="faq-category" id="smart-import">Smart Import (Screenshot, Photo, Camera)</p>
+
+        <div class="faq-item">
+            <h3>What are the &quot;More ways to import&quot; options?</h3>
+            <p>In the Add Recipe form, below the URL field, there's a disclosure labeled <strong>▾ More ways to import</strong>. Expand it and you'll see four options:</p>
+            <ul>
+                <li><strong>Paste Text from Clipboard</strong> — Copy a recipe from Notes, Mail, a Reddit comment, anywhere. Tap this and Apple Intelligence extracts the structured recipe from whatever text you copied.</li>
+                <li><strong>Import from Screenshot</strong> — If you've copied an image to your clipboard (e.g. via the screenshot thumbnail's <em>Copy and Delete</em> button), tap this to OCR it and extract the recipe.</li>
+                <li><strong>Choose Photo from Library</strong> — Pick any image from your Photos library. The most common path: take a screenshot of a Facebook post (saves automatically to Photos), then pick it here.</li>
+                <li><strong>Scan with Camera</strong> — Point the camera at a cookbook page, recipe card, or magazine clipping. The captured photo runs through OCR + extraction.</li>
+            </ul>
+            <p>All four options run <strong>entirely on your device</strong>. No image, no recipe text, and no metadata are sent to LH Vantage or any third party.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>How does the screenshot import work for Facebook recipes?</h3>
+            <p>Facebook actively blocks recipe scrapers, so the URL field can't pull a Facebook post's content directly. The workaround:</p>
+            <ol style="padding-left: 1.5rem; color: var(--muted); font-size: 0.95rem;">
+                <li>In Facebook, take a screenshot of the recipe post (it saves automatically to your Photos library).</li>
+                <li>Open Simmer Down → <strong>Add Recipe</strong> → expand <strong>▾ More ways to import</strong>.</li>
+                <li>Tap <strong>Choose Photo from Library</strong> and pick the screenshot.</li>
+                <li>Wait a couple of seconds. Title, ingredients, and steps fill in.</li>
+                <li>Review and edit anything that looks off, then tap <strong>Save</strong>.</li>
+            </ol>
+        </div>
+
+        <div class="faq-item">
+            <h3>Why don't I see &quot;More ways to import&quot; on my older iPhone / iPad?</h3>
+            <p>The smart-import options use Apple Intelligence — Apple's on-device language model. Apple Intelligence runs only on:</p>
+            <ul>
+                <li><strong>iPhone 15 Pro</strong> or later (the non-Pro iPhone 15 doesn't qualify)</li>
+                <li><strong>iPad</strong> with an M1 chip or later</li>
+                <li>Any <strong>Apple Silicon Mac</strong></li>
+            </ul>
+            <p>The device must also be running iOS / iPadOS / macOS 26 or later, and Apple Intelligence must be enabled in <strong>Settings → Apple Intelligence &amp; Siri</strong>.</p>
+            <p>If you expand the disclosure on a device that doesn't meet these requirements, you'll see an explanation in place of the buttons. The URL import still works normally on every supported device.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>The extracted recipe looks wrong / has things that weren't in the source. What happened?</h3>
+            <p>Two cases:</p>
+            <ul>
+                <li><strong>Source had no real recipe.</strong> If you imported from a YouTube video whose description is just &quot;Click CC, follow my Instagram, like and subscribe&quot;, there's no recipe content to extract. Simmer Down will refuse to invent one and you'll see a &quot;Couldn't pull a recipe out of that&quot; message.</li>
+                <li><strong>The extraction got it partially wrong.</strong> The on-device model is good but not perfect, especially with stylized text on photos or low-resolution screenshots. Take a moment to review what was filled in — you can edit any field before tapping <strong>Save</strong>.</li>
+            </ul>
+            <p>If a clean, well-lit photo consistently produces bad results, email us the image (or a description) at <a href="mailto:support@lhvantage.com">support@lhvantage.com</a> and we'll dig in.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>I started a recipe and switched apps. Will I lose my work?</h3>
+            <p>No. The recipe editor saves your in-progress text continuously to local scene storage. You can switch apps, take a phone call, even have iOS terminate Simmer Down to free memory — when you come back, your draft is still there.</p>
+            <p>The draft only clears when you tap <strong>Save</strong> or <strong>Cancel</strong>.</p>
+        </div>
+
+        <p class="faq-category">Sharing</p>
+
+        <div class="faq-item">
+            <h3>How do I share a recipe with someone?</h3>
+            <p>Open the recipe and tap <strong>Share</strong> (the third pill below the title). You'll get the native iOS share sheet — pick Messages, Mail, Notes, AirDrop, or any other app you've installed.</p>
+            <p>The shared content includes the recipe title, the source URL (if any), the ingredients, and the steps — all formatted as plain text that pastes cleanly anywhere.</p>
         </div>
 
         <p class="faq-category">Family Sharing</p>
@@ -405,6 +469,7 @@
                 <li><strong>iPad</strong> running iPadOS 17 or later</li>
                 <li><strong>Mac</strong> running macOS Sonoma (14) or later</li>
             </ul>
+            <p>The <strong>smart-import options</strong> (screenshot, photo library, camera, paste text) additionally need an Apple-Intelligence-capable device on iOS 26 or later. See <a href="#smart-import">Smart Import</a> for the device list.</p>
         </div>
 
         <div class="faq-item">
@@ -417,6 +482,12 @@
         <div class="faq-item">
             <h3>How is my data handled?</h3>
             <p>Simmer Down doesn't collect personal information. There's no name, email, or password. Your recipes and shopping items sync between members of your family group through Firebase. Nothing is shared outside your family. See the full <a href="/privacy/simmerdown.html">privacy policy</a> for details.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Does the smart import send my photos or recipes to Apple or anyone else?</h3>
+            <p>No. The image OCR (Apple Vision) and the recipe-extraction language model (Apple Foundation Models) both run <strong>entirely on your device</strong>. Your photo, the OCR'd text, and the extracted recipe never leave your phone, iPad, or Mac for AI processing.</p>
+            <p>Recipes do, of course, sync to other members of your family group via Firebase once you tap <strong>Save</strong> — that's the family-sync feature, separate from the AI extraction step.</p>
         </div>
 
         <div class="faq-item">
