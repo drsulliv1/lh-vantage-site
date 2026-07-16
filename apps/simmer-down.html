@@ -717,7 +717,7 @@
 
         <div class="video-col">
             <div class="phone-frame">
-                <video id="demo-video" playsinline>
+                <video id="demo-video" playsinline preload="metadata">
                     <source src="/videos/simmer-down-demo.mp4" type="video/mp4">
                 </video>
                 <div class="play-btn" id="play-btn" onclick="playDemo()">
@@ -875,7 +875,12 @@
         var pauseIcon = document.getElementById('pause-icon');
         var pauseLabel = document.getElementById('pause-label');
 
+        video.addEventListener('loadedmetadata', function() {
+            video.currentTime = 0.5;
+        });
+
         function playDemo() {
+            video.currentTime = 0;
             playBtn.classList.add('hidden');
             controls.classList.add('visible');
             video.play();
