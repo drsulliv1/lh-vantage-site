@@ -668,31 +668,6 @@
 
     <!-- Demo Video + Highlights -->
     <div class="video-highlights-wrap">
-        <div class="video-col">
-            <div class="phone-frame">
-                <video id="demo-video" playsinline>
-                    <source src="/videos/simmer-down-demo.mp4" type="video/mp4">
-                </video>
-                <div class="play-btn" id="play-btn" onclick="playDemo()">
-                    <div class="play-btn-circle">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8 5v14l11-7z"/>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-            <div class="video-controls" id="video-controls">
-                <button class="vid-btn" onclick="restartDemo()">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
-                    Restart
-                </button>
-                <button class="vid-btn" id="pause-btn" onclick="toggleDemo()">
-                    <svg id="pause-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-                    <span id="pause-label">Pause</span>
-                </button>
-            </div>
-        </div>
-
         <div>
             <p class="section-label">Why You'll Like It</p>
             <h2 class="section-title">Just the recipe.</h2>
@@ -737,6 +712,31 @@
                 <h3>Cooking Mode</h3>
                 <p>Keeps the screen on while you're following a recipe. Your phone won't auto-lock mid-stir.</p>
             </div>
+            </div>
+        </div>
+
+        <div class="video-col">
+            <div class="phone-frame">
+                <video id="demo-video" playsinline>
+                    <source src="/videos/simmer-down-demo.mp4" type="video/mp4">
+                </video>
+                <div class="play-btn" id="play-btn" onclick="playDemo()">
+                    <div class="play-btn-circle">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="video-controls" id="video-controls">
+                <button class="vid-btn" onclick="restartDemo()">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+                    Restart
+                </button>
+                <button class="vid-btn" id="pause-btn" onclick="toggleDemo()">
+                    <svg id="pause-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                    <span id="pause-label">Pause</span>
+                </button>
             </div>
         </div>
     </div>
