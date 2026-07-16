@@ -228,6 +228,7 @@
         }
 
         .phone-frame {
+            position: relative;
             width: 280px;
             background: #1a1a1a;
             border-radius: 44px;
@@ -240,6 +241,42 @@
             border-radius: 34px;
             display: block;
         }
+
+        .play-btn {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 34px;
+            cursor: pointer;
+            background: rgba(0,0,0,0.25);
+        }
+
+        .play-btn-circle {
+            width: 64px;
+            height: 64px;
+            background: rgba(255,255,255,0.92);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.15s, background 0.15s;
+        }
+
+        .play-btn:hover .play-btn-circle {
+            transform: scale(1.08);
+            background: #fff;
+        }
+
+        .play-btn svg {
+            width: 24px;
+            height: 24px;
+            margin-left: 4px;
+            fill: var(--simmer);
+        }
+
+        .play-btn.hidden { display: none; }
 
         /* Value props */
         section.block {
@@ -581,9 +618,16 @@
     <!-- Demo Video -->
     <div class="video-section">
         <div class="phone-frame">
-            <video autoplay muted loop playsinline>
+            <video id="demo-video" playsinline>
                 <source src="/videos/simmer-down-demo.mp4" type="video/mp4">
             </video>
+            <div class="play-btn" id="play-btn" onclick="playDemo()">
+                <div class="play-btn-circle">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 5v14l11-7z"/>
+                    </svg>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -760,6 +804,15 @@
                 d.classList.remove('open');
             });
         });
+    </script>
+
+    <script>
+        function playDemo() {
+            var video = document.getElementById('demo-video');
+            var btn = document.getElementById('play-btn');
+            btn.classList.add('hidden');
+            video.play();
+        }
     </script>
 
 </body>
