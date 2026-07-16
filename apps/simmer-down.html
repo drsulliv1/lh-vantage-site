@@ -201,14 +201,44 @@
             flex-wrap: wrap;
         }
 
-        .cta-row .badge-soon {
+        .cta-row .badge-available {
+            display: inline-block;
             padding: 0.6rem 1.2rem;
-            background: #fff;
-            color: var(--text);
-            border: 1.5px dashed var(--border);
+            background: var(--simmer);
+            color: #fff;
+            border: none;
             border-radius: 10px;
             font-size: 0.9rem;
             font-weight: 600;
+            text-decoration: none;
+        }
+
+        .cta-row .badge-available:hover {
+            background: var(--simmer-deep);
+        }
+
+        /* Demo video */
+        .video-section {
+            padding: 4rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .phone-frame {
+            width: 280px;
+            background: #1a1a1a;
+            border-radius: 44px;
+            padding: 12px;
+            box-shadow: 0 32px 80px rgba(0,0,0,0.18);
+        }
+
+        .phone-frame video {
+            width: 100%;
+            border-radius: 34px;
+            display: block;
         }
 
         /* Value props */
@@ -543,10 +573,19 @@
                 <span class="platform-pill">macOS</span>
             </div>
             <div class="cta-row">
-                <span class="badge-soon">Coming soon to the App Store</span>
+                <a class="badge-available" href="#">Available on the App Store</a>
             </div>
         </div>
     </header>
+
+    <!-- Demo Video -->
+    <div class="video-section">
+        <div class="phone-frame">
+            <video autoplay muted loop playsinline>
+                <source src="/videos/simmer-down-demo.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
 
     <!-- Highlights -->
     <section class="block">
