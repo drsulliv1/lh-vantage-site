@@ -380,6 +380,20 @@
             <p>The app only adds songs that Apple Music can stream. Sometimes a track exists in the catalog but isn't available for streaming in your region, or it's only on a compilation that isn't streamable. Those songs are skipped, and you'll see them listed as "failed" in the success summary.</p>
         </div>
 
+        <div class="faq-item" id="apple-music-playlist-error">
+            <h3>I got an error when creating an Apple Music playlist. What should I do?</h3>
+            <p>Most Apple Music playlist errors are iOS-side issues, not bugs in Setlist Builder. The app makes a valid request to iOS's MusicKit framework, but something in iOS or Apple's cloud services blocks the write. This includes cryptic messages like <em>"ICCloudClientErrorDomain error 2018"</em>, <em>"The operation couldn't be completed"</em>, or similar system-level errors.</p>
+            <p>Try these steps in order &mdash; the earlier ones fix the vast majority of cases:</p>
+            <ul>
+                <li><strong>Restart your iPhone.</strong> This resolves most cases. iOS's music-sync services occasionally get stuck in a bad state, and a full reboot is the only reliable clear. Try this <em>first</em> &mdash; it takes 30 seconds and usually works.</li>
+                <li><strong>Verify it's not your account.</strong> Open the Apple Music app directly and try creating any playlist manually. If that also fails, the issue is with your Apple Music account or Apple's servers, not this app.</li>
+                <li><strong>Toggle Sync Library.</strong> Go to <strong>Settings &rarr; Music &rarr; Sync Library</strong>, turn it off, wait about 10 seconds, then turn it back on. Sync Library must be on for any app to create playlists in your Apple Music library.</li>
+                <li><strong>Check your subscription.</strong> Make sure your Apple Music subscription is active and there are no billing issues at <strong>Settings &rarr; [your name] &rarr; Media &amp; Purchases</strong>. Even a brief lapse can put the account in a state where playlist writes fail.</li>
+                <li><strong>Check Apple's system status.</strong> Visit <a href="https://www.apple.com/support/systemstatus/">apple.com/support/systemstatus</a> and look for issues with "Apple Music" or "iCloud Account &amp; Sign In". If Apple's servers are having problems, waiting 15&ndash;30 minutes and trying again is usually enough.</li>
+            </ul>
+            <p>If none of the above resolves it, email us at <a href="mailto:support@lhvantage.com">support@lhvantage.com</a> and include the exact error message shown, your iOS version, and your Apple Music subscription tier.</p>
+        </div>
+
         <p class="faq-category">Live Versions</p>
 
         <div class="faq-item">
